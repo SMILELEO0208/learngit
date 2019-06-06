@@ -18,7 +18,7 @@ git reset : 回退版本，例如：
 git reflog ： 查看命令历史记录(主要是commit 和 reset 命令的记录)
 git checkout --filename : 撤销对工作区的修改；这个命令是以最新的存储时间节点（add和commit）为参照，覆盖工作区对应文件file；这个命令改变的是工作区
 git checkout filename : 切换到另一个分支
-git reset HEAD --filename : 清空add命令向暂存区提交的关于file文件的修改(Ustage); 这个命令仅改变暂存区，并不改变工作区，这意味着在无任何其他操作的情况							   下，工作区中的实际文件同该命令运行之前无任何改变
+git reset HEAD --filename : 清空add命令向暂存区提交的关于file文件的修改(Ustage);这个命令仅改变暂存区，不改变工作区，这意味着在无任何其他操作的情况							   下，工作区中的实际文件同该命令运行之前无任何改变
 git rm filename : 从版本库中删除文件，并且需要git commit才有效
 
 先有本地库，后有远程库，两者关联命令：
