@@ -47,4 +47,6 @@ GitHub 配置SSH Keys，是为了识别出你推送的提交确实是你推送�
 
 Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。
 
+Creating a new branch is quick.
+
 
