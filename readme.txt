@@ -30,6 +30,11 @@ git push -u origin master
 现有远程库，从远程库克隆一个本地库的命令：
 git clone git@github.com:Github账号/gitskills.git
 
+git checkout -b dev：创建分支dev
+git branch：查看分支
+git merge dev：合并分支
+git branch -d dev：删除分支
+
 
 
 名词解释：
