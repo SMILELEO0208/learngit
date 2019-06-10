@@ -60,6 +60,10 @@ SSH创建：本地根目录下是否有.ssh文件，如果存在查看是否有i
 		$ ssh-keygen -t rsa -C"youremail@example.com" ，输入该命令后的操作都可以直接按回车键默认配置。
 GitHub 配置SSH Keys，是为了识别出你推送的提交确实是你推送的，非别人冒充的。
 
+多人协作：现在多了一个小伙伴一起工作，想从master的dev分支上开发工作，必须得先把dev分支push到远程库，新的伙伴再从远程库dev上获取。
+		 git push origin dev
+		 git branch dev origin/dev
+
 
 Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。
 
