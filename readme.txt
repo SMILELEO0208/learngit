@@ -61,3 +61,5 @@ Creating a new branch is quick and simple.
 禁用fast forward模式
 
 merge with no-ff 
+
+新开的分支dev
