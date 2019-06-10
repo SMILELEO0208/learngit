@@ -36,6 +36,7 @@ git merge dev：合并分支
 git branch -d dev：删除分支
 
 git log --graph：查看分支合并图
+git merge --no-ff -m "remark" <name> : 普通合并模式，禁用fast forward,同时创建了一个commit提交
 
 
 
