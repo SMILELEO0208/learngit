@@ -35,6 +35,8 @@ git branch：查看分支
 git merge dev：合并分支
 git branch -d dev：删除分支
 
+git log --graph：查看分支合并图
+
 
 
 名词解释：
