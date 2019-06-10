@@ -46,6 +46,9 @@ git stash pop: 恢复的同时把stash内容也删，等同于上面两个命令
 git stash apply stash@{n}：恢复指定的stash，n正整数，表示第n个stash
 stash的apply、 drop、pop 都可以加上stash@{n}，对指定的stash进行操作
 
+git rebase: 可以把本地未push的分叉提交历史整理成直线
+rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比。
+rebase特点，把分叉的提交历史“整理”成一条直线；缺点是本地的分叉提交已经被修改过了。
 
 
 名词解释：
@@ -79,3 +82,5 @@ Creating a new branch is quick and simple.
 禁用fast forward模式
 
 merge with no-ff 
+
+
