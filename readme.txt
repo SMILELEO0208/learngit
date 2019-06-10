@@ -39,6 +39,15 @@ git log --graph：查看分支合并图
 git merge --no-ff -m "remark" <name> : 普通合并模式，禁用fast forward,同时创建了一个commit提交
 
 
+git stash: 保存当前的工作现场
+git stash list ：查看stash 信息
+git stash apply: 恢复stash，但是并没有删除stash
+git stash drop：删除恢复的stash
+git stash pop: 恢复的同时把stash内容也删，等同于上面两个命令（apply 和 drop）
+git stash apply stash@{n}：恢复指定的stash，n正整数，表示第n个stash
+stash的apply、 drop、pop 都可以加上stash@{n}，对指定的stash进行操作
+
+
 
 名词解释：
 工作区：本地电脑上能看到的目录
@@ -62,8 +71,4 @@ Creating a new branch is quick and simple.
 
 merge with no-ff 
 
-issue-01的版本创建
 
-新开的分支dev
-
-abc
