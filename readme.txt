@@ -60,6 +60,16 @@ SSH创建：本地根目录下是否有.ssh文件，如果存在查看是否有i
 		$ ssh-keygen -t rsa -C"youremail@example.com" ，输入该命令后的操作都可以直接按回车键默认配置。
 GitHub 配置SSH Keys，是为了识别出你推送的提交确实是你推送的，非别人冒充的。
 
+抓取分支：现在多了一个小伙伴一起工作，想从master的dev分支上开发工作，必须得先把dev分支push到远程库，新的伙伴再从远程库dev上获取。
+		 git push origin dev
+		 git branch dev origin/dev
+多人协作：1.抓取分支
+		2.开发，推送自己的修改
+		3.如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；
+		4.如果合并有冲突，则解决冲突，并在本地提交；
+		5.没有冲突或者解决掉冲突后，再用git push origin <branch-name>推送就能成功！
+如果git pull提示no tracking information，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream-to <branch-name> origin/<branch-name>。
+
 
 Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。
 
@@ -69,5 +79,3 @@ Creating a new branch is quick and simple.
 禁用fast forward模式
 
 merge with no-ff 
-
-
