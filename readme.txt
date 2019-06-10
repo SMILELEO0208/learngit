@@ -38,7 +38,6 @@ git branch -d dev：删除分支
 git log --graph：查看分支合并图
 git merge --no-ff -m "remark" <name> : 普通合并模式，禁用fast forward,同时创建了一个commit提交
 
-
 git stash: 保存当前的工作现场
 git stash list ：查看stash 信息
 git stash apply: 恢复stash，但是并没有删除stash
