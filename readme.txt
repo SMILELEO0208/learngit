@@ -87,6 +87,15 @@ GitHub 配置SSH Keys，是为了识别出你推送的提交确实是你推送�
 
 忽略特殊文件：忽略某些文件时，需要编写 .gitignore 文件；.gitignore文件本身要放到版本库里，并且可以对.gitignore做版本管理！
             .gitignore 文件要放在Git工作目录下。
+配置文件：1.通过.git文件夹下的config文件进行配置：
+		  [alias]
+		    last = log -1
+		    br = branch
+		    ci = commit
+		 2.通过命令配置(加上global就是全局变量，针对该电脑上的所有Git库都适用，否则只是针对当前库可用)：
+		 	git config --global alias.br branch：配置查看分支的别名
+   		 	git config --global alias.last "log -1" ：配置查询最后一条提交日志
+   		 	git config --global --unset alias.br : 取消别名的命令 
 
 
 Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。
