@@ -82,8 +82,3 @@ Creating a new branch is quick and simple.
 禁用fast forward模式
 
 merge with no-ff 
-
-789
-
-abc
-def
