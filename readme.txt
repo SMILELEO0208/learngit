@@ -85,6 +85,9 @@ GitHub 配置SSH Keys，是为了识别出你推送的提交确实是你推送�
 		5.没有冲突或者解决掉冲突后，再用git push origin <branch-name>推送就能成功！
 如果git pull提示no tracking information，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream-to <branch-name> origin/<branch-name>。
 
+忽略特殊文件：忽略某些文件时，需要编写 .gitignore 文件；.gitignore文件本身要放到版本库里，并且可以对.gitignore做版本管理！
+            .gitignore 文件要放在Git工作目录下。
+
 
 Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。
 
