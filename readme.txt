@@ -10,6 +10,7 @@ git status : 查看仓库的当前状态(是否被修改)
 git diff filename : 查看修改的内容
 git commit : 提交文件到仓库
 git log : 查看最近到远的提交日志
+git log --pretty=oneline --abbrev-commit：查看历史提交的commit
 git reset : 回退版本，例如：
 		    git reset --hard HEAD^ ：回退到上一个版本
 		    git reset --hard HEAD^ ：回退到上上一个版本
@@ -50,6 +51,17 @@ git rebase: 可以把本地未push的分叉提交历史整理成直线
 rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比。
 rebase特点，把分叉的提交历史“整理”成一条直线；缺点是本地的分叉提交已经被修改过了。
 
+git tag <tagname>：创建标签，默认是当前版本的标签
+git tag : 查看标签
+git tag -a <tagname> -m "备注说明" commit-ID：创建带有说明的标签(不加commit-id就是默认当前版本)
+git tag <tagname> commit-ID ： 给某个commit id创建标签
+git show <tagname>：查看标签信息
+git push origin <tagname>：推送一个本地标签
+git push origin --tags : 推送全部未推送过的本地标签
+git tag -d <tagname>：删除一个本地标签
+git push origin :refs/tags/<tagname> ：删除一个远程标签
+
+
 
 名词解释：
 工作区：本地电脑上能看到的目录
@@ -82,4 +94,3 @@ Creating a new branch is quick and simple.
 禁用fast forward模式
 
 merge with no-ff 
-
