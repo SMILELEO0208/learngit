@@ -1,0 +1,58 @@
+
+总结：
+1.创建脚手架项目，这里的项目名称mydemo
+命令：mvn archetype:generate -DinteractiveMode=false -DarchetypeCatalog=internal -DarchetypeRepository=http://repo.kxg.local/repository/maven-releases/archetype-catalog.xml -DarchetypeGroupId=com.kxll.croods -DarchetypeArtifactId=croods-archetype -DarchetypeVersion=1.0-RELEASE -DgroupId=com.kxg -DartifactId=mydemo -Dversion=0.0.1-SNAPSHOT -Dpackage=com.kxg.mydemo
+需要修改的地方：
+-DgroupId:新建项目的groupId
+-DartifactId:新建项目的artifactId
+-Dversion:新建项目的version
+-Dpackage:新建项目的package
+项目结构：demo
+			demo-api -- 要暴露的服务，即二方包
+			demo-main -- 具体的实现
+创建过程中可能遇到的问题：maven仓库(本地或者是远程)
+2.添加配置
+登录nacos,配置列表里新增一个刚创建的项目配置，配置注意事项：
+Data Id: demo-local.yaml, 这里要参考bootstrap.yml里最上面的spring配置模块，spring配置模块里的name和active组成了Data Id，后缀选择yaml。
+Group：默认
+归属应用: 非必填
+配置内容：可参考项目里application-template.yml里的内容
+3.启动项目会在nacos的服务列表中看到相关服务
+以上一个基本的脚手架项目就完成了。
+下面是在上面的基础上延伸扩展的：
+4.在mydemo-api的模块新建一个外放接口，提供接口方法名称，具体的实现在mydemo-main模块中，具体如下：
+在mydemo-api的api包下新建一个接口类，里面最重要的配置是@FeignClient(value = "mydemo", path = "/api", fallbackFactory = TestFallbackFactory.class),其中value是服务名称，跟bootstrap.yml里spring配置模块里的name保持一致，也就是nacos上配置的服务，即跟nacos的服务列表里的服务名保持一致。在mydemo-main完成具体的接口方法，对mydemo-api进行打包。然后将该二方包部署到远程的仓库即可。
+5.同样创建一个脚手架项目，作为mydemo的服务消费者，配置跟步骤2一样，调用mydemo里的二方包方法，如下：
+引入服务提供者的二方包：
+<dependency>
+    <groupId>com.kxg</groupId>
+    <artifactId>mydemo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+</dependency>
+在服务消费者的Application类上加上注解@EnableFeignClients(basePackages = "com.kxg.mydemo.api"), basePackages为服务提供者提供的二方包中的api。
+服务的调用在TestServiceImpl里实现。
+6.启动服务消费者，输入调用到服务提供者的方法即可。
+
+网关项目
+下载网关项目，同样在nacos上的base_env.yaml里添加项目配置，主要的配置信息如下：
+gateway: # config the routes for gateway
+routes:
+- id: mydemo -----# 将 /mydemo/ 开头的请求转发到 mydemo
+uri: lb://mydemo
+predicates:
+- Path=/mydemo/**
+filters:
+- StripPrefix=1 --------# 表明前缀 /mydemo 需要截取掉
+- id: myDemoConsumer -- mydemo的服务消费者
+uri: lb://myDemoConsumer
+predicates:
+- Path=/myDemoConsumer/**
+filters:
+- StripPrefix=1
+*****这里面的id其实就是服务名称。*****
+***** 总的来说，有几处的命名保持一致就对了：网关配置里的id属性值，跟bootstrap.yaml中的spring配置模块中的name是一样的，跟脚手架项目中的api模块中的接口类中的@FeignClient中的value一样 *****
+启动网关项目，输入：http://localhost:8059/myDemoConsumer/consumer/searchAl
+url解析原理：网关会根据id值的配置将myDemoConsumer开头的请求转发到myDemoConsumer服务上，在找相应的/consumer/searchAl请求方法，一步一步深入到调用服务提供者提供的方法内，同样也是根据@FeignClient(value = "mydemo", path = "/api", fallbackFactory = TestFallbackFactory.class)找到相关的服务，执行相应的方法。
+
+
+
